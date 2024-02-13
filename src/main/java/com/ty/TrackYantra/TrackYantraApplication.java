@@ -21,8 +21,6 @@ public class TrackYantraApplication {
  
 	@Autowired
 	AdminDao adminDaoObject;
-
-
 	
 	@PostConstruct
 	private void init() {
