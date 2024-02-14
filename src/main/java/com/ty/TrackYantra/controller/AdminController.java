@@ -52,6 +52,7 @@ public class AdminController {
              String lastname="Bond";
              String email="James@gmail.com";
              String password="james@123";
+
              long contact=98521456;
              
              admin1.setAdminId(id);
@@ -68,7 +69,6 @@ public class AdminController {
 			return adminServiceObject.saveAdmin(admin1);
 		} else {
 			log.error("Admin Already Exists");
-			System.out.println("");
 		}
 		return null;
 
@@ -77,7 +77,6 @@ public class AdminController {
 	@GetMapping("/getAdminByDesignation/adminId/{passedDesignation}")
 	@Operation(description = "get Admin By Designation",summary = "Admin Found With Designation")
 	@ApiResponses(value =  {@ApiResponse(description = "admin found with designation",responseCode = "201"),@ApiResponse(description = "Admin Does Not Exist For Given Role",responseCode = "404")})
-	
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByDesignation(Designation passedDesignation) {
 		return adminServiceObject.getAdminByDesignation(passedDesignation);
 		
