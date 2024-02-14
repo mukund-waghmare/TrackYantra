@@ -35,7 +35,7 @@ public class EmployeeDao {
 		}
 	}
 	
-	public List<Employee> getAllEmployee(Employee employee) {
+	public List<Employee> getAllEmployee() {
 		return employeeRepository.findAll();
 	 
 	}
