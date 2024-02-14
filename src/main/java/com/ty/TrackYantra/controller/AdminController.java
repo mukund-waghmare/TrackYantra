@@ -2,13 +2,14 @@ package com.ty.TrackYantra.controller;
 
 import java.util.List;
 
+
 import org.apache.commons.logging.Log;
 
-import com.ty.TrackYantra.service.ReportingManagerImplementation;
-import com.ty.TrackYantra.service.ReportingManagerService;
+import org.apache.commons.logging.Log;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +45,7 @@ public class AdminController {
 
 		ResponseEntity<ResponseStructure<Admin>> admin = adminServiceObject.getAdminByDesignation(Designation.ADMIN);
 
-		if (admin.getBody().getData() == null) {
+		if (admin==null) {
 			Admin admin1 = new Admin();
 			 int id=1;
 			 String firstName="James";
@@ -52,6 +53,7 @@ public class AdminController {
              String email="James@gmail.com";
              String password="james@123";
              long contact=98521456;
+             
              admin1.setAdminId(id);
 
 			admin1.setAdminFirstName(firstName);
@@ -68,7 +70,7 @@ public class AdminController {
 			log.error("Admin Already Exists");
 			System.out.println("");
 		}
-		return admin;
+		return null;
 
 	}
 
@@ -78,6 +80,7 @@ public class AdminController {
 	
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByDesignation(Designation passedDesignation) {
 		return adminServiceObject.getAdminByDesignation(passedDesignation);
+		
 	}
 
 	@GetMapping("/getAdminById/adminId/{passedId}")
