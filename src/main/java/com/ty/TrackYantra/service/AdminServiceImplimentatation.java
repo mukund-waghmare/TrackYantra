@@ -56,8 +56,8 @@ public class AdminServiceImplimentatation implements AdminService {
 			
 		}
 		//throw Admin Doesnot Exist For Given Designation
-		
-		throw new DesignationNotFoundException("Designation Not Found : "+passedDesignation);
+	
+	   return null;
 	}
 
 	@Override
@@ -142,6 +142,7 @@ public class AdminServiceImplimentatation implements AdminService {
 		throw new IdNotFoundException("Employee Not Found For Specified Reporting Manager Id : "+passedReportingManagerId);
 		
 	}
+
 
 
 }

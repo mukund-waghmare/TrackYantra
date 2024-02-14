@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ReportingManagerService {
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerEmailById(int reportingManagerId,String adminEmail,String adminPassword , ReportingManager reportingManager);
+	
+    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId, ReportingManager reportingManager);
 
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerById (String adminEmail,String adminPassword,int reportingManagerId);
 
