@@ -1,5 +1,6 @@
 package com.ty.TrackYantra.dto;
 
+import com.ty.TrackYantra.util.Status;
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Entity;
@@ -45,12 +46,6 @@ public class Employee {
 	
 	private double totalWorkHours;
 	
-	
-	
-	
-	
-	
-	
-	
+	private Status status;
 
 }

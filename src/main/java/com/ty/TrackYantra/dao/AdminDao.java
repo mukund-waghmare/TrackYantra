@@ -15,9 +15,7 @@ import com.ty.TrackYantra.repository.EmployeeRepository;
 import com.ty.TrackYantra.repository.RepotingManagerRepository;
 
 @Repository
-public class AdminDao {
-	
-	
+public class  AdminDao {
 	@Autowired
 	AdminRepository adminRepositoryObject;
 	
@@ -91,6 +89,12 @@ public class AdminDao {
 		return null;
 	}
 	
-	
+	public Admin getAdminByEmailAndPassword(String adminEmail,String adminPassword){
+		Admin admin = adminRepositoryObject.findByAdminEmailAndAdminPassword(adminEmail,adminPassword);
+		if (admin!=null){
+			return admin;
+		}else
+			return null;
+	}
 
 }
