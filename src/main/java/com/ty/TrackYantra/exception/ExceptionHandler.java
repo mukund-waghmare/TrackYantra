@@ -1,15 +1,11 @@
 package com.ty.TrackYantra.exception;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import com.ty.TrackYantra.dto.ResponseStructure;
->>>>>>> 7d0d9346d9ceeae808195ac6c8fbc71eae4118ac
-=======
 
 import com.ty.TrackYantra.dto.ResponseStructure;
 
->>>>>>> 38c532ab7e6d92f654e98e30372459008d5bc05c
+
+import com.ty.TrackYantra.dto.ResponseStructure;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,12 +14,7 @@ import com.ty.TrackYantra.dto.ResponseStructure;
 
 @RestControllerAdvice
 public class ExceptionHandler {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 38c532ab7e6d92f654e98e30372459008d5bc05c
-	
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(DesignationNotFoundException.class)
 	public ResponseEntity<ResponseStructure<String>> designationNotFoundException(DesignationNotFoundException exception)
@@ -56,11 +47,7 @@ public class ExceptionHandler {
 		
 		return new ResponseEntity<ResponseStructure<String>>(resp,HttpStatus.NOT_FOUND);	
 	}
-<<<<<<< HEAD
-=======
-=======
 
->>>>>>> 38c532ab7e6d92f654e98e30372459008d5bc05c
     @org.springframework.web.bind.annotation.ExceptionHandler(ReportingManagerNotFound.class)
     public ResponseEntity<ResponseStructure<String>> reportingManagerNotFoundException(ReportingManagerNotFound reportingManagerNotFound){
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
@@ -69,11 +56,7 @@ public class ExceptionHandler {
         responseStructure.setData(null);
         return new ResponseEntity<>(responseStructure,HttpStatus.NOT_FOUND);
     }
-<<<<<<< HEAD
->>>>>>> 7d0d9346d9ceeae808195ac6c8fbc71eae4118ac
-=======
 
->>>>>>> 38c532ab7e6d92f654e98e30372459008d5bc05c
 
 
     @org.springframework.web.bind.annotation.ExceptionHandler(ReportingManagerNotSaved.class)

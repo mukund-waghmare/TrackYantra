@@ -37,11 +37,19 @@ public class AdminDao {
 	
 	public Admin getAdminByDesignation(Designation passedDesignation)
 	{
-		 Admin admin=adminRepositoryObject.findAdminByDesignation(passedDesignation);
-		 if(admin!=null)
-		 {
-			 return admin;
-		 }
+		Admin admin=null;
+		try {
+			
+		
+		 admin=adminRepositoryObject.findAdminByDesignation(passedDesignation);
+		}
+		catch(Exception e)
+		{
+			 if(admin!=null)
+			 {
+				 return admin;
+			 }
+		}
 		 return null;
 	}
 	
