@@ -18,4 +18,6 @@ public interface AdminService {
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(String passedEmail);
 	public ResponseEntity<ResponseStructure<List<ReportingManager>>> getAllReportingManager();
 	public ResponseEntity<ResponseStructure<List<Employee>>> getEmployeeByReportingManagerID(int passedReportingManagerId);
+
+	
 }
