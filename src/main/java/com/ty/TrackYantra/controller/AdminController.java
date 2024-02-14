@@ -2,12 +2,11 @@ package com.ty.TrackYantra.controller;
 
 import java.util.List;
 
-<<<<<<< HEAD
+
 import org.apache.commons.logging.Log;
-=======
-import com.ty.TrackYantra.service.ReportingManagerImplementation;
-import com.ty.TrackYantra.service.ReportingManagerService;
->>>>>>> 7d0d9346d9ceeae808195ac6c8fbc71eae4118ac
+
+import org.apache.commons.logging.Log;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
