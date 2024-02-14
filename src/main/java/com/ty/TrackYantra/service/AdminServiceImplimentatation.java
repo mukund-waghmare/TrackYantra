@@ -143,7 +143,11 @@ public class AdminServiceImplimentatation implements AdminService {
 		
 	}
 
+<<<<<<< HEAD
 	
 	
+=======
+
+>>>>>>> 7d0d9346d9ceeae808195ac6c8fbc71eae4118ac
 
 }

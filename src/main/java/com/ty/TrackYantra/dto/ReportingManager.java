@@ -27,7 +27,7 @@ public class ReportingManager {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int adminId;
+	private int reportingManagerId;
 	
 	private String firstName;
 	
