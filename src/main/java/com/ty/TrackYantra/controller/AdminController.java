@@ -3,12 +3,14 @@ package com.ty.TrackYantra.controller;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
+
+import com.ty.TrackYantra.service.ReportingManagerImplementation;
+import com.ty.TrackYantra.service.ReportingManagerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.ty.TrackYantra.dto.Admin;
@@ -29,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class AdminController {
+
 
 	@Autowired
 	AdminService adminServiceObject;
