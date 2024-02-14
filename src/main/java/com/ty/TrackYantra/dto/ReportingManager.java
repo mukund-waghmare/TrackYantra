@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.ty.TrackYantra.util.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class ReportingManager {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int adminId;
+	private int reportingManagerId;
 	
 	private String firstName;
 	
@@ -47,7 +48,8 @@ public class ReportingManager {
 	private Location location;
 	
 	private byte [] image;
-	
+
+	private Status status;
 	
 	@OneToMany(mappedBy ="reportingManager" )
 	@JsonIgnore
@@ -61,8 +63,5 @@ public class ReportingManager {
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore
 	private List<Employee> trainerList;
-	
-	
-	
 
 }
