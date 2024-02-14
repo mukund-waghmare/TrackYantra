@@ -13,6 +13,9 @@ import com.ty.TrackYantra.dto.Designation;
 import com.ty.TrackYantra.dto.Employee;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
+import com.ty.TrackYantra.exception.DesignationNotFoundException;
+import com.ty.TrackYantra.exception.EmailNotFoundException;
+import com.ty.TrackYantra.exception.IdNotFoundException;
 
 @Service
 public class AdminServiceImplimentatation implements AdminService {
@@ -53,7 +56,8 @@ public class AdminServiceImplimentatation implements AdminService {
 			
 		}
 		//throw Admin Doesnot Exist For Given Designation
-		return null;
+		
+		throw new DesignationNotFoundException("Designation Not Found : "+passedDesignation);
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class AdminServiceImplimentatation implements AdminService {
 		}
 
 		//throw Admin Doesnot Exist For Given Id
-		return null;
+		throw new IdNotFoundException("Admin Does Not Exist For The Given Id : "+passedId);
 	}
 
 	@Override
@@ -92,7 +96,8 @@ public class AdminServiceImplimentatation implements AdminService {
 		
 
 		//throw Admin Doesnot Exist For Given Email
-		return null;
+		throw new EmailNotFoundException("Admin Does Not Exist For The Specified Email :"+passedEmail);
+		
 	}
 
 	@Override
@@ -134,8 +139,11 @@ public class AdminServiceImplimentatation implements AdminService {
 		}
 			
 		// manager does not exist for givenId
-		return null;
+		throw new IdNotFoundException("Employee Not Found For Specified Reporting Manager Id : "+passedReportingManagerId);
+		
 	}
+
+	
 	
 
 }
