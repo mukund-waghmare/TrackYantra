@@ -10,9 +10,10 @@ import com.ty.TrackYantra.exception.ReportingManagerNotSaved;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ReportingManagerImplementation implements ReportingManagerService {
     @Autowired
     private ReportingManagerDao reportingManagerDao;
