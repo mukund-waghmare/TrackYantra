@@ -65,4 +65,13 @@ public class ExceptionHandler {
         responseStructure.setData(null);
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<ResponseStructure<String>> adminNotFoundException(AdminNotFoundException adminNotFoundException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+        responseStructure.setMessage(adminNotFoundException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.NOT_FOUND);
+    }
 }
