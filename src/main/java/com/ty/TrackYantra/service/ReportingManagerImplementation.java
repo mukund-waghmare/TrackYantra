@@ -1,3 +1,4 @@
+
 package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
@@ -128,7 +129,11 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 86aa2cd59703461df63cf24fb5862c65e460c5c7
 	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {

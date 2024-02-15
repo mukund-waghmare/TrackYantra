@@ -68,6 +68,15 @@ public class ExceptionHandler {
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
     
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<ResponseStructure<String>> adminNotFoundException(AdminNotFoundException adminNotFoundException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+        responseStructure.setMessage(adminNotFoundException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.NOT_FOUND);
+    }
     //employee related exceptions
     
     @org.springframework.web.bind.annotation.ExceptionHandler(EmployeeNotFoundException.class)
@@ -106,10 +115,12 @@ public class ExceptionHandler {
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
     
-    
-    
-    
-    
-    
-    
+    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidEmployeeCredentialsException.class)
+    public ResponseEntity<ResponseStructure<String>>InvalidEmployeeCredentialsException(InvalidAdminCredentials invalidEmployeeCredentialsException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(invalidEmployeeCredentialsException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
 }
