@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.ty.TrackYantra.dao.AdminDao;
 import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Employee;
@@ -23,12 +24,15 @@ public class EmployeeServiceImplementation implements EmployeeService{
 	
 	@Autowired
 	EmployeeDao employeeDao;
+	
+	@Autowired
+	AdminDao adminDao;
 
 	@Override
 	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(String adminEmail,String adminPassword,Employee employee) {
 		
-		
-		if(true)
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if(admin!=null)
 		{
 			Employee savedEmployee=employeeDao.saveEmployee(employee);
 			
@@ -56,20 +60,39 @@ public class EmployeeServiceImplementation implements EmployeeService{
 
 	@Override
 	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(String adminEmail,String adminPassword,int eid, Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if(admin!=null)
+		{
+			return null;
+		}
+		else
+		{
+			//wrongAdmincredentials exception
+			throw new InvalidAdminCredentials("invalid admin credentials");
+		}
 	}
 
 	@Override
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(String adminEmail,String adminPassword,int eid, Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if(admin!=null)
+		{
+			return null;
+		}
+		else
+		{
+			//wrongAdmincredentials exception
+			throw new InvalidAdminCredentials("invalid admin credentials");
+		}
 	}
 
 	@Override
 	public ResponseEntity<ResponseStructure<Employee>> getEmployeeById(String adminEmail,String adminPassword,int eid) {
 		
-		if(true)
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if(admin!=null)
 		{
 			Employee foundEmployee= employeeDao.getEmployee(eid);
 			
@@ -98,7 +121,8 @@ public class EmployeeServiceImplementation implements EmployeeService{
 	@Override
 	public ResponseEntity<ResponseStructure<List<Employee>>> getAllEmployees(String adminEmail,String adminPassword) {
 		
-		if(true)
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if(admin!=null)
 		{
 			List<Employee> employees=employeeDao.getAllEmployee();
 			
