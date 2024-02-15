@@ -114,6 +114,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             throw new IdNotFoundException("Admin with specified id");
     }
 
+
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword) {
          ReportingManager reportingManager = reportingManagerDao.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
@@ -126,4 +127,10 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
+	@Override
+	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
+			ReportingManager reportingManager) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

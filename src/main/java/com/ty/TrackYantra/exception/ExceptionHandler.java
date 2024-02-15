@@ -67,4 +67,49 @@ public class ExceptionHandler {
         responseStructure.setData(null);
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
+    
+    //employee related exceptions
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<ResponseStructure<String>> employeeNotFoundException(EmployeeNotFoundException employeeNotFoundException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(employeeNotFoundException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(EmployeeNotSaved.class)
+    public ResponseEntity<ResponseStructure<String>> employeeNotSaved(EmployeeNotSaved employeeNotSaved){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(employeeNotSaved.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(NoEmployeesExistException.class)
+    public ResponseEntity<ResponseStructure<String>> NoEmployeesExistException(NoEmployeesExistException noEmployeesExistException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(noEmployeesExistException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidAdminCredentials.class)
+    public ResponseEntity<ResponseStructure<String>>InvalidAdminCredentials(InvalidAdminCredentials invalidAdminCredentials){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(invalidAdminCredentials.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
+    
+    
+    
+    
+    
+    
+    
 }

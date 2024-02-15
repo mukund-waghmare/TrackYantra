@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.TrackYantra.dto.Employee;
 import com.ty.TrackYantra.repository.EmployeeRepository;
 
+@Repository
 public class EmployeeDao {
 	
 	@Autowired
@@ -35,7 +37,7 @@ public class EmployeeDao {
 		}
 	}
 	
-	public List<Employee> getAllEmployee(Employee employee) {
+	public List<Employee> getAllEmployee() {
 		return employeeRepository.findAll();
 	 
 	}
