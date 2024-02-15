@@ -42,7 +42,8 @@ public class EmployeeController {
 	@PutMapping("/updateemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
     public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
 		
-		return employeeService.updateEmployee(adminEmail, adminPassword, eid, employee);
+		
+		return employeeService.updateEmployeeNameById(adminEmail, adminPassword, eid, employee);
 	}
 	
 	@Operation(description = "delete Employee",summary = "delete Employee")

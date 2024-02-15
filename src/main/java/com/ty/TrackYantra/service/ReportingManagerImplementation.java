@@ -1,3 +1,4 @@
+
 package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
@@ -115,6 +116,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
     }
 
 
+
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword) {
          ReportingManager reportingManager = reportingManagerDao.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
@@ -127,6 +129,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
+
 	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {
