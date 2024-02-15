@@ -53,6 +53,7 @@ public class AdminController {
 
 		if (admin == null) {
 			Admin admin1 = new Admin();
+
 			int id = 1;
 			String firstName = "James";
 			String lastname = "Bond";
@@ -60,7 +61,7 @@ public class AdminController {
 			String password = "james@123";
 			long contact = 98521456;
 
-			admin1.setAdminId(id);
+			admin1.setAdminId(id); 
 
 			admin1.setAdminFirstName(firstName);
 			admin1.setAdminLastName(lastname);
@@ -74,17 +75,16 @@ public class AdminController {
 			return adminServiceObject.saveAdmin(admin1);
 		} else {
 			log.error("Admin Already Exists");
-			System.out.println("");
 		}
 		return null;
 
 	}
 
 	@GetMapping("/getAdminByDesignation/adminId/{passedDesignation}")
+
 	@Operation(description = "get Admin By Designation", summary = "Admin Found With Designation")
 	@ApiResponses(value = { @ApiResponse(description = "admin found with designation", responseCode = "201"),
-			@ApiResponse(description = "Admin Does Not Exist For Given Role", responseCode = "404") })
-
+	@ApiResponse(description = "Admin Does Not Exist For Given Role", responseCode = "404") })
 	public ResponseEntity<ResponseStructure<Admin>> getAdminByDesignation(Designation passedDesignation) {
 		return adminServiceObject.getAdminByDesignation(passedDesignation);
 

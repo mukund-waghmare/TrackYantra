@@ -1,8 +1,12 @@
 package com.ty.TrackYantra.dto;
 
+import com.ty.TrackYantra.util.Status;
 import org.hibernate.annotations.ManyToAny;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -20,7 +24,7 @@ import lombok.Setter;
 public class Employee {
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employeeId;
 	
 	private String employeeFirstName;
@@ -45,12 +49,6 @@ public class Employee {
 	
 	private double totalWorkHours;
 	
-	
-	
-	
-	
-	
-	
-	
+	private Status status;
 
 }
