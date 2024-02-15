@@ -15,9 +15,7 @@ import com.ty.TrackYantra.repository.EmployeeRepository;
 import com.ty.TrackYantra.repository.RepotingManagerRepository;
 
 @Repository
-public class AdminDao {
-	
-	
+public class  AdminDao {
 	@Autowired
 	AdminRepository adminRepositoryObject;
 	
@@ -37,11 +35,19 @@ public class AdminDao {
 	
 	public Admin getAdminByDesignation(Designation passedDesignation)
 	{
-		 Admin admin=adminRepositoryObject.findAdminByDesignation(passedDesignation);
-		 if(admin!=null)
-		 {
-			 return admin;
-		 }
+		Admin admin=null;
+		try {
+			
+		
+		 admin=adminRepositoryObject.findAdminByDesignation(passedDesignation);
+		}
+		catch(Exception e)
+		{
+			 if(admin!=null)
+			 {
+				 return admin;
+			 }
+		}
 		 return null;
 	}
 	
@@ -91,6 +97,12 @@ public class AdminDao {
 		return null;
 	}
 	
-	
+	public Admin getAdminByEmailAndPassword(String adminEmail,String adminPassword){
+		Admin admin = adminRepositoryObject.findByAdminEmailAndAdminPassword(adminEmail,adminPassword);
+		if (admin!=null){
+			return admin;
+		}else
+			return null;
+	}
 
 }
