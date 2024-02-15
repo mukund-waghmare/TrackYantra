@@ -56,5 +56,13 @@ public class ReportingManager {
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore
 	private List<Employee> trainerList;
+	
+	@OneToMany(mappedBy = "manager")
+	@JsonIgnore
+	private List<Login>  logins;
+	
+	@OneToMany(mappedBy = "manager")
+	@JsonIgnore
+	private List<Logout>  logouts;
 
 }

@@ -44,10 +44,10 @@ public class ReportingManagerImplementation implements ReportingManagerService {
              throw new IdNotFoundException("Admin with specified id");
     }
 
-    @Override
-    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId, ReportingManager reportingManager) {
-        return null;
-    }
+//    @Override
+//    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId, ReportingManager reportingManager) {
+//        return null;
+//    }
 
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerById(String adminEmail,String adminPassword,int reportingManagerId) {
@@ -129,7 +129,11 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> 86aa2cd59703461df63cf24fb5862c65e460c5c7
 	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {

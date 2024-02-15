@@ -1,6 +1,10 @@
 package com.ty.TrackYantra.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.TrackYantra.util.Status;
+
+import java.util.List;
+
 import org.hibernate.annotations.ManyToAny;
 
 import jakarta.annotation.Generated;
@@ -50,5 +54,13 @@ public class Employee {
 	private double totalWorkHours;
 	
 	private Status status;
+	
+	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	private List<Login>  logins;
+	
+	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	private List<Logout>  logouts;
 
 }
