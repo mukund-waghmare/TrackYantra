@@ -114,4 +114,13 @@ public class ExceptionHandler {
         responseStructure.setData(null);
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
+    
+    @org.springframework.web.bind.annotation.ExceptionHandler(InvalidEmployeeCredentialsException.class)
+    public ResponseEntity<ResponseStructure<String>>InvalidEmployeeCredentialsException(InvalidAdminCredentials invalidEmployeeCredentialsException){
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        responseStructure.setMessage(invalidEmployeeCredentialsException.getMessage());
+        responseStructure.setData(null);
+        return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+    }
 }

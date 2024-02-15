@@ -17,7 +17,9 @@ import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.EmployeeNotSaved;
 import com.ty.TrackYantra.exception.IdNotFoundException;
 import com.ty.TrackYantra.exception.InvalidAdminCredentials;
+import com.ty.TrackYantra.exception.InvalidEmployeeCredentialsException;
 import com.ty.TrackYantra.exception.NoEmployeesExistException;
+import com.ty.TrackYantra.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImplementation implements EmployeeService{
@@ -27,6 +29,9 @@ public class EmployeeServiceImplementation implements EmployeeService{
 	
 	@Autowired
 	AdminDao adminDao;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 
 	@Override
 	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(String adminEmail,String adminPassword,Employee employee) {
@@ -59,16 +64,24 @@ public class EmployeeServiceImplementation implements EmployeeService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(String adminEmail,String adminPassword,int eid, Employee employee) {
+	public ResponseEntity<ResponseStructure<Employee>> updateEmployeeNameById(String adminEmail,String adminPassword,int eid, Employee employee) {
 		
 		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
 		if(admin!=null)
 		{
+			Optional<Employee> optionalEmployee =employeeRepository.findById(eid);
+			if(optionalEmployee.isPresent()) {
+				Employee dbEmployee = optionalEmployee.get();
+				dbEmployee.setEmployeeFirstName(employee.getEmployeeFirstName());
+				dbEmployee.setEmployeeLastName(employee.getEmployeeLastName());
+				employeeDao.updateEmployeeById(dbEmployee);
+			}else {
+				throw new IdNotFoundException("Employee ID not Found");
+			}
 			return null;
 		}
 		else
 		{
-			//wrongAdmincredentials exception
 			throw new InvalidAdminCredentials("invalid admin credentials");
 		}
 	}
@@ -145,6 +158,25 @@ public class EmployeeServiceImplementation implements EmployeeService{
 		{
 			throw new InvalidAdminCredentials("invalid admin credentials");
 		}
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<Employee>> findEmployeeByEmployeeEmailAndEmployeePassword(
+			String employeeEmail, String employeePassword) {
+		
+		Employee employee = employeeDao.findEmployeeByEmployeeEmailAndEmployeePassword(employeeEmail, employeePassword);
+		if(employee!=null) {
+			ResponseStructure<Employee> resp= new ResponseStructure<Employee>();
+			resp.setMessage("list of all employees fetched");
+			resp.setStatusCode(HttpStatus.OK.value());
+			resp.setData(employee);
+			
+			return new ResponseEntity<ResponseStructure<Employee>>(resp,HttpStatus.OK);
+		}else {
+			throw new InvalidEmployeeCredentialsException("Invalid Employee credentials");
+		}
+		
+		
 	}
 
 }
