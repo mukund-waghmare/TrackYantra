@@ -106,5 +106,11 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             throw new IdNotFoundException("Admin with specified id");
     }
 
-	
+
+	@Override
+	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
+			ReportingManager reportingManager) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

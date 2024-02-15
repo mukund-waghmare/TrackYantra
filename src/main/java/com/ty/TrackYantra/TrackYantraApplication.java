@@ -17,6 +17,8 @@ public class TrackYantraApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TrackYantraApplication.class, args);
+		
+		
 	}
 	
 }
