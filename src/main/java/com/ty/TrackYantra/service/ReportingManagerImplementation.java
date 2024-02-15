@@ -1,3 +1,4 @@
+
 package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
@@ -104,4 +105,6 @@ public class ReportingManagerImplementation implements ReportingManagerService {
         }else
             throw new IdNotFoundException("Admin with specified id");
     }
+
+	
 }
