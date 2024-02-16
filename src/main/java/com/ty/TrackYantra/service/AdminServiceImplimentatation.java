@@ -8,20 +8,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.TrackYantra.dao.AdminDao;
+import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Designation;
 import com.ty.TrackYantra.dto.Employee;
+import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.exception.DesignationNotFoundException;
 import com.ty.TrackYantra.exception.EmailNotFoundException;
+import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.IdNotFoundException;
+import com.ty.TrackYantra.exception.ReportingManagerNotFound;
 
 @Service
 public class AdminServiceImplimentatation implements AdminService {
 	
 	@Autowired
 	AdminDao adminDaoObject;
+	
+	@Autowired
+	EmployeeDao employeeDao;
 
 	@Override
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin passedAdmin) {
@@ -64,8 +71,10 @@ public class AdminServiceImplimentatation implements AdminService {
 	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int passedId) {
 		
 		Admin admin=adminDaoObject.getAdminById(passedId);
+		
 		if(admin!=null)
 		{
+			
 			ResponseStructure<Admin> resp= new ResponseStructure<Admin>();
 			resp.setMessage("Success");
 			resp.setStatusCode(HttpStatus.ACCEPTED.value());
@@ -106,7 +115,12 @@ public class AdminServiceImplimentatation implements AdminService {
 		
 		List<ReportingManager> repoManagerList=adminDaoObject.getAllReportingManager();
 		
-		if(repoManagerList!=null)
+		
+		if(repoManagerList.isEmpty())
+		{
+			throw new ReportingManagerNotFound("Reporting Manager List Is Empty");
+		}
+		else if(repoManagerList!=null)
 		{
 			ResponseStructure<List<ReportingManager>> resp= new ResponseStructure<List<ReportingManager>>();
 			resp.setMessage("Success");
@@ -143,6 +157,31 @@ public class AdminServiceImplimentatation implements AdminService {
 		
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<ReportingManager>> saveEmployeeToReportingManagerById(int reportingManagerId,int employeeId) 
+	{
 
+		
+	Employee employee=employeeDao.getEmployee(employeeId);
+	
+	if(employee!=null)
+	{
+		
+		ReportingManager reportingManager=adminDaoObject.saveEmployeeToReportingManagerById(reportingManagerId, employee);
+		if(reportingManager!=null)
+		{
+		
+			ResponseStructure<ReportingManager> resp= new ResponseStructure<>();
+			resp.setData(reportingManager);
+			resp.setMessage("Success");
+			resp.setStatusCode(HttpStatus.ACCEPTED.value());
+			
+			return new ResponseEntity<ResponseStructure<ReportingManager>>(resp,HttpStatus.ACCEPTED);
+		}
+	}
+	throw new EmployeeNotFoundException("Employee Doesnot Exist For Specified Id : "+employeeId);
+	
+
+}
 
 }

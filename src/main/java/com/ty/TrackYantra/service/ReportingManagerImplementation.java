@@ -87,7 +87,8 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             } else {
                 throw new ReportingManagerNotSaved("Reporting Manager Details Not Saved");
             }
-        }else{
+        }
+        else{
             throw new IdNotFoundException("Admin Not Found");
         }
     }
