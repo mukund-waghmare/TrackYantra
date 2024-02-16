@@ -51,8 +51,9 @@ public class ReportingManager {
 
 	@ManyToOne
 	@JoinColumn(name = "reportingManagerList")
-	private Admin adminList;
+	private Admin admin;
 	
+
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore
 	private List<Employee> trainerList;
@@ -64,5 +65,6 @@ public class ReportingManager {
 	@OneToMany(mappedBy = "manager")
 	@JsonIgnore
 	private List<Logout>  logouts;
+
 
 }
