@@ -12,6 +12,7 @@ import com.ty.TrackYantra.dao.AdminDao;
 import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Employee;
+import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.EmployeeNotSaved;
@@ -75,10 +76,16 @@ public class EmployeeServiceImplementation implements EmployeeService{
 				dbEmployee.setEmployeeFirstName(employee.getEmployeeFirstName());
 				dbEmployee.setEmployeeLastName(employee.getEmployeeLastName());
 				employeeDao.updateEmployeeById(dbEmployee);
+				
+				ResponseStructure<Employee> resp= new ResponseStructure<Employee>();
+				resp.setMessage("Employee saved successfully");
+				resp.setStatusCode(HttpStatus.CREATED.value());
+				resp.setData(dbEmployee);
+				return new ResponseEntity<ResponseStructure<Employee>>(resp,HttpStatus.OK);
 			}else {
 				throw new IdNotFoundException("Employee ID not Found");
 			}
-			return null;
+			
 		}
 		else
 		{
@@ -92,7 +99,28 @@ public class EmployeeServiceImplementation implements EmployeeService{
 		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
 		if(admin!=null)
 		{
-			return null;
+			Optional<Employee> optionalEmployee =employeeRepository.findById(eid);
+			
+			if(optionalEmployee.isPresent()) {
+				Employee dbEmployee = optionalEmployee.get();
+				ReportingManager reportingManager = dbEmployee.getReportingManager();
+				List<Employee> employees = reportingManager.getEmployeeList();
+				for(Employee emp:employees) {
+					if(emp.getEmployeeId()==eid) {
+						employees.remove(emp);
+					}
+				}
+				reportingManager.setEmployeeList(employees);
+				dbEmployee.setReportingManager(null);
+				Employee deletedemployee =  employeeDao.deleteEmployee(dbEmployee);
+				ResponseStructure<Employee> resp= new ResponseStructure<Employee>();
+				resp.setMessage("Employee saved successfully");
+				resp.setStatusCode(HttpStatus.CREATED.value());
+				resp.setData(deletedemployee);
+				return new ResponseEntity<ResponseStructure<Employee>>(resp,HttpStatus.OK);
+			}else {
+				throw new IdNotFoundException("Employee ID not Found");
+			}
 		}
 		else
 		{
