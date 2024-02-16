@@ -20,4 +20,6 @@ public interface ReportingManagerService {
     ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerPasswordById(int reportingManagerId, String adminEmail, String adminPassword, ReportingManager reportingManager);
 
      ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword);
+
+    ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId);
 }

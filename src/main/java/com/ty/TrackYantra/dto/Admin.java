@@ -45,14 +45,14 @@ public class Admin {
 	
 	private Designation designation;
 	
-	@OneToMany(mappedBy = "adminList")
+	@OneToMany(mappedBy = "admin")
 	@JsonIgnore
 	private List<ReportingManager> reportingManagerList;
 	
 	
 	@OneToMany
 	@JsonIgnore
-	private List<Employee> trainerList;
+	private List<Employee> employeeList;
 	
 	
 	@OneToMany

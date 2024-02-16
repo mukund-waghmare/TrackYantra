@@ -3,11 +3,9 @@ package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
 import com.ty.TrackYantra.dao.EmployeeDao;
+import com.ty.TrackYantra.dao.LocationDao;
 import com.ty.TrackYantra.dao.ReportingManagerDao;
-import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Employee;
-import com.ty.TrackYantra.dto.ReportingManager;
-import com.ty.TrackYantra.dto.ResponseStructure;
+import com.ty.TrackYantra.dto.*;
 import com.ty.TrackYantra.exception.IdNotFoundException;
 import com.ty.TrackYantra.exception.ReportingManagerNotFound;
 import com.ty.TrackYantra.exception.ReportingManagerNotSaved;
@@ -26,6 +24,8 @@ public class ReportingManagerImplementation implements ReportingManagerService {
     @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    private LocationDao locationDao;
     @Autowired
     private EmployeeDao employeeDao;
     @Override
@@ -87,7 +87,8 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             } else {
                 throw new ReportingManagerNotSaved("Reporting Manager Details Not Saved");
             }
-        }else{
+        }
+        else{
             throw new IdNotFoundException("Admin Not Found");
         }
     }
@@ -126,7 +127,15 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
-	@Override
+
+    @Override
+    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId) {
+        ReportingManager reportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
+//
+        return null;
+    }
+
+    @Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {
 		// TODO Auto-generated method stub

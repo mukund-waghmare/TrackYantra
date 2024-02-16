@@ -41,8 +41,6 @@ public class EmployeeController {
 	@ApiResponses(value = {@ApiResponse(description = "Employee details updated",responseCode = "200"),@ApiResponse(description = "Employee details Not Updated",responseCode = "400")})
 	@PutMapping("/updateemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
     public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
-		
-		
 		return employeeService.updateEmployeeNameById(adminEmail, adminPassword, eid, employee);
 	}
 	

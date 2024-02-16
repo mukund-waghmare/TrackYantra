@@ -29,8 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Login {
-
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginId;
@@ -56,17 +55,12 @@ public class Login {
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
-	
+  
 	@ManyToOne
 	@JoinColumn(name = "admin_id")
 	private Admin admin;
+
 	
-	
-	
-	
-	
-	
-	
-	
+
 
 }

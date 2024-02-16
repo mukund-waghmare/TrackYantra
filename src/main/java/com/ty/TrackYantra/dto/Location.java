@@ -25,7 +25,9 @@ public class Location {
 	private int locationId;
 	private String longitude;
 	private String latitude;
-	
+
+	private String organisationAddress;
+
 	private String accurracy;
 	
 	private Date timeStamp;

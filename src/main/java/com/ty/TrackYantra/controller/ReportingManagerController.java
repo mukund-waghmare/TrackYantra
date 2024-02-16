@@ -20,6 +20,7 @@ public class ReportingManagerController {
     @Autowired
     private ReportingManagerService reportingManagerService;
 
+
     @Operation(description = "Update Reporting Manager Email",summary = "update reporting manager by id")
     @ApiResponses(value = {@ApiResponse(description = "Update Reporting Manager Email",responseCode = "200"),@ApiResponse(description = "Not Updated",responseCode = "404")})
     @PutMapping("/updateReportingManagerEmailById/adminEmail/{adminEmail}/adminPassword/{adminPassword}/reportingManagerId/{reportingManagerId}")
@@ -54,5 +55,10 @@ public class ReportingManagerController {
     @GetMapping("/getReportingManagerByEmailAndPassword/reportingManagerEmail/{reportingManagerEmail}/reportingManagerPassword/{reportingManagerPassword}")
     public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(@PathVariable String reportingManagerEmail,@PathVariable String reportingManagerPassword){
         return reportingManagerService.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
+    }
+
+    @PutMapping("updateReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/locationId/{locationId}")
+    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,@PathVariable int locationId){
+       return reportingManagerService.updateReportingManagerLocationByReportingManagerId(reportingManagerId,locationId);
     }
 }
