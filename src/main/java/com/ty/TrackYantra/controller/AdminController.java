@@ -29,7 +29,7 @@ import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/info")
+//@RequestMapping("/info")
 @Slf4j
 @CrossOrigin
 public class AdminController {
@@ -47,7 +47,7 @@ public class AdminController {
 	@Operation(description = "save Admin", summary = "Admin saved successfully")
 	@ApiResponses(value = { @ApiResponse(description = "Admin saved successfully", responseCode = "201"),
 			@ApiResponse(description = "Admin not saved", responseCode = "404") })
-	public ResponseEntity<ResponseStructure<Admin>> saveAdmin() {
+	private ResponseEntity<ResponseStructure<Admin>> saveAdmin() {
 
 		ResponseEntity<ResponseStructure<Admin>> admin = adminServiceObject.getAdminByDesignation(Designation.ADMIN);
 
@@ -81,7 +81,6 @@ public class AdminController {
 	}
 
 	@GetMapping("/getAdminByDesignation/adminId/{passedDesignation}")
-
 	@Operation(description = "get Admin By Designation", summary = "Admin Found With Designation")
 	@ApiResponses(value = { @ApiResponse(description = "admin found with designation", responseCode = "201"),
 	@ApiResponse(description = "Admin Does Not Exist For Given Role", responseCode = "404") })
@@ -95,12 +94,14 @@ public class AdminController {
 	@ApiResponses(value = { @ApiResponse(description = "Admin Found For Given Id", responseCode = "201"),
 			@ApiResponse(description = "Admin Does Not Exist For Given Id", responseCode = "404") })
 
-	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int passedId) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(@PathVariable int passedId) {
+		System.out.println("============================Controller====================");
+		
 		return adminServiceObject.getAdminById(passedId);
 	}
 
 	@GetMapping("/getAdminByEmail/adminEmail/{passedEmail}")
-	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(String passedEmail) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdminByEmail(@PathVariable String passedEmail) {
 		return adminServiceObject.getAdminByEmail(passedEmail);
 	}
 
@@ -115,6 +116,12 @@ public class AdminController {
 		return adminServiceObject.getEmployeeByReportingManagerID(passedReportingManagerId);
 
 	} 
+	
+	@PostMapping("saveEmployeeToReportingManagerById/reportingManagerId/{reportingManagerId}/")
+	public ResponseEntity<ResponseStructure<ReportingManager>> saveEmployeeToReportingManagerById(int reportingManagerId, Employee passedEmployee){
+		return adminServiceObject.saveEmployeeToReportingManagerById(reportingManagerId, reportingManagerId);
+	}
+
 
 	
 	
