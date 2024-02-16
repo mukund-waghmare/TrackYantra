@@ -38,8 +38,8 @@ public class ReportingManagerController {
     @Operation(description = "Save Reporting Manager",summary = "save reporting manager")
     @ApiResponses(value = {@ApiResponse(description = "Save Reporting Manager",responseCode = "200"),@ApiResponse(description = "Not Save",responseCode = "400")})
     @PostMapping("/addReportingManager/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
-    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(@PathVariable String adminEmail, @PathVariable String adminPassword, @ModelAttribute ReportingManager reportingManager,@RequestParam("image") MultipartFile file) throws IOException {
-        return reportingManagerService.saveReportingManager(adminEmail,adminPassword,reportingManager,file);
+    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(@PathVariable String adminEmail, @PathVariable String adminPassword, @RequestBody ReportingManager reportingManager) {
+        return reportingManagerService.saveReportingManager(adminEmail,adminPassword,reportingManager);
     }
 
     @Operation(description = "Update Reporting Manager Password",summary = "update reporting email manager by id")

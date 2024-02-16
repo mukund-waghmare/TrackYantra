@@ -15,7 +15,7 @@ public interface ReportingManagerService {
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId, ReportingManager reportingManager);
 
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerById (String adminEmail,String adminPassword,int reportingManagerId);
-    ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(String adminEmail, String adminPassword, ReportingManager reportingManager, MultipartFile file) throws IOException;
+    ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(String adminEmail, String adminPassword, ReportingManager reportingManager);
 
     ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerPasswordById(int reportingManagerId, String adminEmail, String adminPassword, ReportingManager reportingManager);
 

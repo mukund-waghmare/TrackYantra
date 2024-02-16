@@ -1,5 +1,6 @@
 package com.ty.TrackYantra.dto;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ public class Location {
 	
 	private String accurracy;
 	
-	private LocalDateTime timeStamp;
+	private Date timeStamp;
 	
 	private String city;
 	
