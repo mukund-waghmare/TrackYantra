@@ -1,3 +1,4 @@
+
 package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
@@ -29,25 +30,23 @@ public class ReportingManagerImplementation implements ReportingManagerService {
     private EmployeeDao employeeDao;
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerEmailById(int reportingManagerId, String adminEmail,String adminPassword, ReportingManager reportingManager) {
-         ReportingManager recReportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
-         Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
-         if (admin!=null) {
-             if (recReportingManager != null) {
-                 recReportingManager.setEmail(reportingManager.getEmail());
-                 ReportingManager updatedReportingManager = reportingManagerDao.updateReportingManagerById(recReportingManager);
-                 ResponseStructure<ReportingManager> responseStructure = new ResponseStructure<>();
-                 responseStructure.setStatusCode(HttpStatus.OK.value());
-                 responseStructure.setMessage("Updated Successfully");
-                 responseStructure.setData(updatedReportingManager);
-                 return new ResponseEntity<ResponseStructure<ReportingManager>>(responseStructure, HttpStatus.OK);
-             } else {
-                 throw new ReportingManagerNotFound("Reporting Manager Not Found of Specified Id");
-             }
-         }else
-             throw new IdNotFoundException("Admin with specified id");
+        ReportingManager recReportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
+        Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail, adminPassword);
+        if (admin != null) {
+            if (recReportingManager != null) {
+                recReportingManager.setEmail(reportingManager.getEmail());
+                ReportingManager updatedReportingManager = reportingManagerDao.updateReportingManagerById(recReportingManager);
+                ResponseStructure<ReportingManager> responseStructure = new ResponseStructure<>();
+                responseStructure.setStatusCode(HttpStatus.OK.value());
+                responseStructure.setMessage("Updated Successfully");
+                responseStructure.setData(updatedReportingManager);
+                return new ResponseEntity<ResponseStructure<ReportingManager>>(responseStructure, HttpStatus.OK);
+            } else {
+                throw new ReportingManagerNotFound("Reporting Manager Not Found of Specified Id");
+            }
+        } else
+            throw new IdNotFoundException("Admin with specified id");
     }
-
-
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerById(String adminEmail,String adminPassword,int reportingManagerId) {
         ReportingManager recReportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
@@ -112,6 +111,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
         }else
             throw new IdNotFoundException("Admin with specified id");
     }
+
 
 
     @Override
