@@ -127,6 +127,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
+
 	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {

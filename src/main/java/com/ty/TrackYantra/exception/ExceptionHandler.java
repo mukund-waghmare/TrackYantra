@@ -115,6 +115,21 @@ public class ExceptionHandler {
         return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
     }
     
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(LocationIdNotFoundException.class)
+    public ResponseEntity<ResponseStructure<String>> locationIdNotFoundException(LocationIdNotFoundException locationIdNotFound)
+    {
+    	ResponseStructure<String> resp= new ResponseStructure<String>();
+    	resp.setMessage(locationIdNotFound.getMessage());
+    	resp.setStatusCode(HttpStatus.NOT_FOUND.value());
+    	
+    	return new ResponseEntity<ResponseStructure<String>>(resp,HttpStatus.NOT_FOUND);
+    	
+    }
+
+    
+    
+
     @org.springframework.web.bind.annotation.ExceptionHandler(InvalidEmployeeCredentialsException.class)
     public ResponseEntity<ResponseStructure<String>>InvalidEmployeeCredentialsException(InvalidAdminCredentials invalidEmployeeCredentialsException){
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
