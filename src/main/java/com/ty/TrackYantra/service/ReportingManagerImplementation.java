@@ -128,6 +128,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
              throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
     }
 
+
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId) {
         ReportingManager reportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
@@ -135,7 +136,7 @@ public class ReportingManagerImplementation implements ReportingManagerService {
         return null;
     }
 
-    @Override
+	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {
 		// TODO Auto-generated method stub

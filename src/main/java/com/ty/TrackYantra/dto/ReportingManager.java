@@ -54,7 +54,6 @@ public class ReportingManager {
 	@JoinColumn(name = "reportingManagerList")
 	private Admin admin;
 
-
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore
 	private List<Employee> trainerList;
