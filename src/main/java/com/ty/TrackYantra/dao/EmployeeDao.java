@@ -41,9 +41,9 @@ public class EmployeeDao {
 		return employeeRepository.findAll();
 	 
 	}
+	public Employee findEmployeeByEmployeeEmailAndEmployeePassword(String employeeEmail, String employeePassword) {
+		return employeeRepository.findEmployeeByEmployeeEmailAndEmployeePassword(employeeEmail, employeePassword);
+	}
 	
 	
-	
-	
-
 }

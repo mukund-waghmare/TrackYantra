@@ -55,9 +55,13 @@ public class Admin {
 	private List<Employee> employeeList;
 	
 	
+	@OneToMany
+	@JsonIgnore
+	private List<Login>  logins ;
 	
-	
-	
+	@OneToMany
+	@JsonIgnore
+	private List<Logout>  logout ;
 	
 	
 	

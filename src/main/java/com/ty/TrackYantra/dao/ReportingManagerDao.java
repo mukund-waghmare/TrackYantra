@@ -32,4 +32,12 @@ public class ReportingManagerDao {
     public ReportingManager saveReportingManager(ReportingManager reportingManager) {
         return repotingManagerRepository.save(reportingManager);
     }
+
+    public ReportingManager getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword) {
+        ReportingManager reportingManager = repotingManagerRepository.findByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
+        if (reportingManager!=null){
+            return  reportingManager;
+        }else
+            return null;
+    }
 }
