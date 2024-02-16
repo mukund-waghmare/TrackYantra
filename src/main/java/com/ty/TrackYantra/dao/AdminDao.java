@@ -1,24 +1,19 @@
 package com.ty.TrackYantra.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Designation;
 import com.ty.TrackYantra.dto.Employee;
-import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ReportingManager;
-import com.ty.TrackYantra.exception.EmployeeNotFoundException;
-import com.ty.TrackYantra.exception.ReportingManagerNotFound;
 import com.ty.TrackYantra.repository.AdminRepository;
 import com.ty.TrackYantra.repository.EmployeeRepository;
 import com.ty.TrackYantra.repository.RepotingManagerRepository;
-import com.ty.TrackYantra.repository.locationRepository;
+import com.ty.TrackYantra.repository.LocationRepository;
 
 @Repository
 public class  AdminDao {
@@ -32,7 +27,7 @@ public class  AdminDao {
 	EmployeeRepository employeeRepository;
 	
 	@Autowired
-	locationRepository locationRepository;
+    LocationRepository locationRepository;
 	
 	
 	public Admin saveAdmin(Admin admin)

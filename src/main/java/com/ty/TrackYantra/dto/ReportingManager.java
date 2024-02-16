@@ -53,7 +53,6 @@ public class ReportingManager {
 	@ManyToOne
 	@JoinColumn(name = "reportingManagerList")
 	private Admin admin;
-	
 
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore
