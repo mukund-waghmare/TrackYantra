@@ -29,6 +29,7 @@ public class LocationServiceImplimentation implements LocationService {
 	public ResponseEntity<ResponseStructure<Location>> saveLocation(Location passedLocation) {
 		
 		Location location=locationDaoObject.saveLocation(passedLocation);
+		System.out.println("=================service after saving======="+location);
 		ResponseStructure<Location> resp= new ResponseStructure<>();
 		resp.setMessage("Success");
 		resp.setStatusCode(HttpStatus.ACCEPTED.value());

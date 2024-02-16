@@ -19,7 +19,11 @@ public interface ReportingManagerService {
 
     ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerPasswordById(int reportingManagerId, String adminEmail, String adminPassword, ReportingManager reportingManager);
 
-     ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword);
+     ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword,String adminEmail,String adminPassword);
 
-    ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId);
+    ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId,String adminEmail,String adminPassword);
+
+    ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerLocationByReportingManagerId(int reportingManagerId, String adminPassword, String adminEmail);
+
+    ResponseEntity<ResponseStructure<ReportingManager>> uploadProfileImage(int reportingManagerId, MultipartFile file);
 }

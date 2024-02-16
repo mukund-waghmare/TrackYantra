@@ -15,8 +15,6 @@ import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.service.LocationService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
 @RestController
 public class LocationController {
 	
@@ -34,6 +32,7 @@ public class LocationController {
 	@PostMapping("/saveLocation")
 	public ResponseEntity<ResponseStructure<Location>> saveLocation(@RequestBody Location location)
 	{
+		System.out.println("======================"+location.getCountry());
 		return locationServiceObject.saveLocation(location);
 	}
 	

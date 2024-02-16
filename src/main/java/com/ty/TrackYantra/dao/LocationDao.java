@@ -31,6 +31,8 @@ public class LocationDao {
 	
 	public Location saveLocation(Location location)
 	{
+
+		System.out.println("=================Dao======="+location);
 		return locationRepository.save(location);
 	}
 	
