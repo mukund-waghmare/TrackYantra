@@ -13,8 +13,9 @@ import com.ty.TrackYantra.dto.ResponseStructure;
 public interface EmployeeService {
 
 	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(String adminEmail,String adminPassword,Employee employee);
-	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(String adminEmail,String adminPassword,int eid,Employee employee);
+	public ResponseEntity<ResponseStructure<Employee>> updateEmployeeNameById(String adminEmail,String adminPassword,int eid,Employee employee);
 	public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(String adminEmail,String adminPassword,int eid,Employee employee);
 	public ResponseEntity<ResponseStructure<Employee>> getEmployeeById(String adminEmail,String adminPassword,int eid);
 	public ResponseEntity<ResponseStructure<List<Employee>>> getAllEmployees(String adminEmail,String adminPassword);
+	public ResponseEntity<ResponseStructure<Employee>> findEmployeeByEmployeeEmailAndEmployeePassword(String employeeEmail, String employeePassword);
 }

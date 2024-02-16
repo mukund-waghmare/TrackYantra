@@ -1,3 +1,4 @@
+
 package com.ty.TrackYantra.service;
 
 import com.ty.TrackYantra.dao.AdminDao;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 @Service
 public class ReportingManagerImplementation implements ReportingManagerService {
@@ -41,6 +44,11 @@ public class ReportingManagerImplementation implements ReportingManagerService {
              throw new IdNotFoundException("Admin with specified id");
     }
 
+//    @Override
+//    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId, ReportingManager reportingManager) {
+//        return null;
+//    }
+
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerById(String adminEmail,String adminPassword,int reportingManagerId) {
         ReportingManager recReportingManager = reportingManagerDao.getReportingManagerById(reportingManagerId);
@@ -67,10 +75,12 @@ public class ReportingManagerImplementation implements ReportingManagerService {
     }
 
     @Override
-    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(String adminEmail,String adminPassword,ReportingManager reportingManager) {
-        ReportingManager savedReportingManager = reportingManagerDao.saveReportingManager(reportingManager);
+    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(String adminEmail, String adminPassword, ReportingManager reportingManager, MultipartFile file) throws IOException {
         Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
         if (admin!=null) {
+            byte[] bytes = file.getBytes();
+            reportingManager.setImage(bytes);
+            ReportingManager savedReportingManager = reportingManagerDao.saveReportingManager(reportingManager);
             if (savedReportingManager != null) {
                 ResponseStructure<ReportingManager> responseStructure = new ResponseStructure<>();
                 responseStructure.setStatusCode(HttpStatus.CREATED.value());
@@ -106,6 +116,21 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             throw new IdNotFoundException("Admin with specified id");
     }
 
+
+
+    @Override
+    public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword) {
+         ReportingManager reportingManager = reportingManagerDao.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
+         if (reportingManager!=null){
+             ResponseStructure<ReportingManager> responseStructure =new ResponseStructure<>();
+             responseStructure.setStatusCode(HttpStatus.OK.value());
+             responseStructure.setMessage("Success");
+             responseStructure.setData(reportingManager);
+             return new ResponseEntity<ResponseStructure<ReportingManager>>(responseStructure,HttpStatus.OK);
+         }else
+             throw new ReportingManagerNotFound("Reporting Manager of Specified Id Not Found!!");
+    }
+    
 	@Override
 	public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerById(int reportingManagerId,
 			ReportingManager reportingManager) {
