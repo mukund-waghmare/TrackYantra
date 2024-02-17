@@ -1,11 +1,10 @@
 package com.ty.TrackYantra.exception;
 
-public class IdNotFoundException extends RuntimeException {
+public class LocationIdNotFoundException extends RuntimeException {
 	
 	String message;
 	
-	public IdNotFoundException(String message) {
-		// TODO Auto-generated constructor stub
+	public LocationIdNotFoundException(String message) {
 		this.message=message;
 	}
 	
@@ -14,5 +13,7 @@ public class IdNotFoundException extends RuntimeException {
 		// TODO Auto-generated method stub
 		return message;
 	}
+	
+	
 
 }

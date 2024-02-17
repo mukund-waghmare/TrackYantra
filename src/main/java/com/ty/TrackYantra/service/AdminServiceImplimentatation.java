@@ -8,20 +8,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.TrackYantra.dao.AdminDao;
+import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Designation;
 import com.ty.TrackYantra.dto.Employee;
+import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.exception.DesignationNotFoundException;
 import com.ty.TrackYantra.exception.EmailNotFoundException;
+import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.IdNotFoundException;
+import com.ty.TrackYantra.exception.InvalidAdminCredentials;
+import com.ty.TrackYantra.exception.ReportingManagerNotFound;
 
 @Service
 public class AdminServiceImplimentatation implements AdminService {
 	
 	@Autowired
 	AdminDao adminDaoObject;
+	
+	@Autowired
+	EmployeeDao employeeDao;
 
 	@Override
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin passedAdmin) {
@@ -61,11 +69,13 @@ public class AdminServiceImplimentatation implements AdminService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int passedId) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(String adminEmail,String adminPassword,int passedId) {
 		
 		Admin admin=adminDaoObject.getAdminById(passedId);
+		
 		if(admin!=null)
 		{
+			
 			ResponseStructure<Admin> resp= new ResponseStructure<Admin>();
 			resp.setMessage("Success");
 			resp.setStatusCode(HttpStatus.ACCEPTED.value());
@@ -101,48 +111,110 @@ public class AdminServiceImplimentatation implements AdminService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<List<ReportingManager>>> getAllReportingManager() {
+	public ResponseEntity<ResponseStructure<List<ReportingManager>>> getAllReportingManager(String adminEmail,String adminPassword) {
 		// TODO Auto-generated method stub
 		
-		List<ReportingManager> repoManagerList=adminDaoObject.getAllReportingManager();
+		Admin loginStatus=adminDaoObject.getAdminByEmailAndPassword(adminEmail, adminPassword);
 		
-		if(repoManagerList!=null)
+		if(loginStatus!=null)
 		{
-			ResponseStructure<List<ReportingManager>> resp= new ResponseStructure<List<ReportingManager>>();
-			resp.setMessage("Success");
-			resp.setStatusCode(HttpStatus.ACCEPTED.value());
-			resp.setData(repoManagerList);
-			return new ResponseEntity<ResponseStructure<List<ReportingManager>>>(resp,HttpStatus.ACCEPTED);
+
+			List<ReportingManager> repoManagerList=adminDaoObject.getAllReportingManager();
 			
+			
+			if(repoManagerList.isEmpty())
+			{
+				throw new ReportingManagerNotFound("Reporting Manager List Is Empty");
+			}
+			else if(repoManagerList!=null)
+			{
+				ResponseStructure<List<ReportingManager>> resp= new ResponseStructure<List<ReportingManager>>();
+				resp.setMessage("Success");
+				resp.setStatusCode(HttpStatus.ACCEPTED.value());
+				resp.setData(repoManagerList);
+				return new ResponseEntity<ResponseStructure<List<ReportingManager>>>(resp,HttpStatus.ACCEPTED);
+				
+			}
+			
+			// throw no Reporting Manager Found
+			//-----------------
+
+			throw new ReportingManagerNotFound("No Reporting Manager Exist");
+
 		}
+		throw new InvalidAdminCredentials("Invalid Admin Credentials Email: "+adminEmail+" And Password : "+adminPassword);
 		
-		// throw no Reporting Manager Found
-		return null;
-	}
+			}
 
 	@Override
 	public ResponseEntity<ResponseStructure<List<Employee>>> getEmployeeByReportingManagerID(
-			int passedReportingManagerId) {
+			String adminEmail,String adminPassword,int passedReportingManagerId) {
 		// TODO Auto-generated method stub
 		
-		List<Employee> employeeList=adminDaoObject.getEmployeeByReportingManagerID(passedReportingManagerId);
+		Admin loginStatus=adminDaoObject.getAdminByEmailAndPassword(adminEmail, adminPassword);
 		
-		if(employeeList!=null)
+		if(loginStatus!=null)
 		{
-			ResponseStructure<List<Employee>> resp= new ResponseStructure<List<Employee>>();
-			resp.setMessage("Success");
-			resp.setStatusCode(HttpStatus.ACCEPTED.value());
-			resp.setData(employeeList);
-			return new ResponseEntity<ResponseStructure<List<Employee>>>(resp,HttpStatus.ACCEPTED);
+
 			
+			List<Employee> employeeList=adminDaoObject.getEmployeeByReportingManagerID(passedReportingManagerId);
 			
+			if(employeeList!=null)
+			{
+				ResponseStructure<List<Employee>> resp= new ResponseStructure<List<Employee>>();
+				resp.setMessage("Success");
+				resp.setStatusCode(HttpStatus.ACCEPTED.value());
+				resp.setData(employeeList);
+				return new ResponseEntity<ResponseStructure<List<Employee>>>(resp,HttpStatus.ACCEPTED);
+				
+				
+				
+				//-----------------
+
+			}
+				
+			// manager does not exist for givenId
+			throw new IdNotFoundException("Employee Not Found For Specified Reporting Manager Id : "+passedReportingManagerId);
+
+
 		}
-			
-		// manager does not exist for givenId
-		throw new IdNotFoundException("Employee Not Found For Specified Reporting Manager Id : "+passedReportingManagerId);
-		
+		throw new InvalidAdminCredentials("Invalid Admin Credentials Email: "+adminEmail+" And Password : "+adminPassword);
+				
 	}
 
+	@Override
+	public ResponseEntity<ResponseStructure<ReportingManager>> saveEmployeeToReportingManagerById(String adminEmail,String adminPassword,int reportingManagerId,int employeeId) 
+	{
 
+	Admin loginStatus=adminDaoObject.getAdminByEmailAndPassword(adminEmail, adminPassword);
+	
+	if(loginStatus!=null)
+	{
+		Employee employee=employeeDao.getEmployee(employeeId);
+		
+		if(employee!=null)
+		{
+			
+			ReportingManager reportingManager=adminDaoObject.saveEmployeeToReportingManagerById(reportingManagerId, employee);
+			if(reportingManager!=null)
+			{
+			
+				ResponseStructure<ReportingManager> resp= new ResponseStructure<>();
+				resp.setData(reportingManager);
+				resp.setMessage("Success");
+				resp.setStatusCode(HttpStatus.ACCEPTED.value());
+				
+				return new ResponseEntity<ResponseStructure<ReportingManager>>(resp,HttpStatus.ACCEPTED);
+			}
+		}
+		throw new EmployeeNotFoundException("Employee Doesnot Exist For Specified Id : "+employeeId);
+
+
+	}
+	throw new InvalidAdminCredentials("Invalid Admin Credentials Email: "+adminEmail+" And Password : "+adminPassword);
+	
+
+
+   }
 
 }

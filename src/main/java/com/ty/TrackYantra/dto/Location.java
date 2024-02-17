@@ -1,5 +1,6 @@
 package com.ty.TrackYantra.dto;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -22,15 +23,14 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int locationId;
-	private String longitude;
-	private String latitude;
-	
-	private String accurracy;
-	
-	private LocalDateTime timeStamp;
+
+
+	private double longitude;
+	private double latitude;
+
+	private String organisationAddress;
 	
 	private String city;
-	
 	private String  country;
 	
 	

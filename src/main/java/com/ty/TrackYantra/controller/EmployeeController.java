@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Employee;
@@ -41,8 +42,6 @@ public class EmployeeController {
 	@ApiResponses(value = {@ApiResponse(description = "Employee details updated",responseCode = "200"),@ApiResponse(description = "Employee details Not Updated",responseCode = "400")})
 	@PutMapping("/updateemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
     public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
-		
-		
 		return employeeService.updateEmployeeNameById(adminEmail, adminPassword, eid, employee);
 	}
 	
@@ -70,5 +69,15 @@ public class EmployeeController {
 		return employeeService.getAllEmployees(adminEmail, adminPassword);
 	}
 	
+	
+	@Operation(description = "save profile photo",summary = "save profile photo")
+	@ApiResponses(value = {@ApiResponse(description = " profile photo saved successfully",responseCode = "200"),@ApiResponse(description = "failed to save profile photo",responseCode = "400")})
+	@GetMapping("/saveImageToEmployee/employeeId/{employeeId}")
+    public ResponseEntity<ResponseStructure<Employee>> getAllEmployees(@PathVariable int employeeId,MultipartFile multipart) {
+		
+
+		
+		return employeeService.saveProfilePhoto(employeeId, multipart);
+	}
 	
 }

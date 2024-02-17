@@ -13,6 +13,7 @@ import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.repository.AdminRepository;
 import com.ty.TrackYantra.repository.EmployeeRepository;
 import com.ty.TrackYantra.repository.RepotingManagerRepository;
+import com.ty.TrackYantra.repository.LocationRepository;
 
 @Repository
 public class  AdminDao {
@@ -24,6 +25,9 @@ public class  AdminDao {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+    LocationRepository locationRepository;
 	
 	
 	public Admin saveAdmin(Admin admin)
@@ -55,9 +59,11 @@ public class  AdminDao {
 	public Admin getAdminById(int passedAdminId)
 	{
 		 Optional<Admin> admin=adminRepositoryObject.findById(passedAdminId);
-		 if(admin.isEmpty())
+		 if(admin.isPresent())
 		 {
-			 return admin.get();
+		      Admin currentAdminObject=admin.get();
+			  return currentAdminObject;
+			  
 		 }
 		 return null;
 	}
@@ -90,9 +96,14 @@ public class  AdminDao {
 	public List<Employee> getEmployeeByReportingManagerID(int passedReportingManagerId)
 	{
 		Optional<ReportingManager> reportingManager=repotingManagerRepositoryObject.findById(passedReportingManagerId);
-		if(reportingManager!=null)
+		if(reportingManager.isPresent())
 		{
-			return reportingManager.get().getEmployeeList();
+			 List<Employee> employeeList=reportingManager.get().getEmployeeList();
+			 if(employeeList!=null)
+			 {
+				 return employeeList;
+			 }
+			 
 		}
 		return null;
 	}
@@ -104,5 +115,39 @@ public class  AdminDao {
 		}else
 			return null;
 	}
+	
+	public ReportingManager saveEmployeeToReportingManagerById(int reportingManagerId,Employee employee)
+	{
+		Optional<ReportingManager> repotingManagerOpt=repotingManagerRepositoryObject.findById(reportingManagerId);
+	
+		
+		
+		if(repotingManagerOpt.isPresent() )
+		{
+			ReportingManager reportingManager=repotingManagerOpt.get();
+			
+			employee.setReportingManager(reportingManager);
+			List<Employee> empList=reportingManager.getEmployeeList();
+			empList.add(employee);
+			reportingManager.setEmployeeList(empList);
+			
+			employeeRepository.save(employee);
+			repotingManagerRepositoryObject.save(reportingManager);
+			
+			return reportingManager;
+			
+			}
+		else
+		{
+		   return null;
+		}
+
+				
+	}
+	
+	
+	
+		
+	
 
 }
