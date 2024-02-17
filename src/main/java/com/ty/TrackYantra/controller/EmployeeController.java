@@ -44,7 +44,7 @@ public class EmployeeController {
 		return employeeService.updateEmployeeNameById(adminEmail, adminPassword, eid, employee);
 	}
 	
-	@Operation(description = "delete Employee",summary = "delete Employee")
+	@Operation(description = "delete Employee",summary = "Delete Employee")
 	@ApiResponses(value = {@ApiResponse(description = "Employee deleted",responseCode = "200"),@ApiResponse(description = "Employee Not Deleted",responseCode = "400")})
 	@DeleteMapping("/deleteemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
     public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
@@ -64,9 +64,7 @@ public class EmployeeController {
 	@ApiResponses(value = {@ApiResponse(description = "Employees list fetched successfully",responseCode = "200"),@ApiResponse(description = "No Employees exist",responseCode = "400")})
 	@GetMapping("/getallemployees/adminemail/{adminEmail}/adminpassword/{adminPassword}")
     public ResponseEntity<ResponseStructure<List<Employee>>> getAllEmployees(@PathVariable String adminEmail,@PathVariable String adminPassword) {
-		
 		return employeeService.getAllEmployees(adminEmail, adminPassword);
 	}
-	
-	
+
 }
