@@ -13,7 +13,7 @@ import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dao.LoginDao;
 import com.ty.TrackYantra.dao.ReportingManagerDao;
 import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Designation;
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.dto.Employee;
 import com.ty.TrackYantra.dto.Login;
 import com.ty.TrackYantra.dto.ReportingManager;

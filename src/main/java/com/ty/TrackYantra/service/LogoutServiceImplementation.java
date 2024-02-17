@@ -13,16 +13,14 @@ import com.ty.TrackYantra.dao.EmployeeDao;
 import com.ty.TrackYantra.dao.LogoutDao;
 import com.ty.TrackYantra.dao.ReportingManagerDao;
 import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Designation;
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.dto.Employee;
-import com.ty.TrackYantra.dto.Login;
 import com.ty.TrackYantra.dto.Logout;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.InvalidAdminCredentials;
 import com.ty.TrackYantra.exception.ReportingManagerNotFound;
-import com.ty.TrackYantra.repository.LogoutRepository;
 
 @Service
 public class LogoutServiceImplementation implements LogoutService

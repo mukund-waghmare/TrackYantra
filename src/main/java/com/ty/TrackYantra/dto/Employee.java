@@ -1,13 +1,11 @@
 package com.ty.TrackYantra.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.util.Status;
 
 import java.util.List;
 
-import org.hibernate.annotations.ManyToAny;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

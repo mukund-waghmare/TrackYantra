@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Designation;
 import com.ty.TrackYantra.dto.Employee;
-import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 
 public interface EmployeeService {

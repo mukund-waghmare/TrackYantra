@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.util.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
