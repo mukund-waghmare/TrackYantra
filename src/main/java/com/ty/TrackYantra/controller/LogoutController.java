@@ -14,7 +14,7 @@ import com.ty.TrackYantra.service.LogoutService;
 public class LogoutController 
 {
 	@Autowired
-	private LogoutService  logoutService;
+	private LogoutService logoutService;
 	
 	@PostMapping("/logout")
 	public ResponseEntity<ResponseStructure<Logout>> saveLogout(@RequestBody Logout logout)
