@@ -75,4 +75,14 @@ public class LocationServiceImplimentation implements LocationService {
         }else
             throw new LocationByAddressNotFound("Location Of Corresponding Address Not Found");
     }
+
+	@Override
+	public ResponseEntity<ResponseStructure<Location>> validateLocation(int organisationId, double altitude,
+			double lattitude) {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+
+	
 }

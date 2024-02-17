@@ -87,7 +87,6 @@ public class LoginServiceImplementation implements LoginService{
 				throw new ReportingManagerNotFound("invalid credentilas");
 			}
 		}
-		
 		else  {
 			Employee employee=employeeDao.findEmployeeByEmployeeEmailAndEmployeePassword(login.getEmail(), login.getPassword());
 			if(employee!=null) {
