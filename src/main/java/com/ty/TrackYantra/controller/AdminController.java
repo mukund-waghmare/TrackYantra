@@ -2,30 +2,21 @@ package com.ty.TrackYantra.controller;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
-import org.apache.commons.logging.Log;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Designation;
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.dto.Employee;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.service.AdminService;
-import com.ty.TrackYantra.service.AdminServiceImplimentatation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController

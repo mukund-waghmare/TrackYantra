@@ -20,7 +20,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Location {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int locationId;
@@ -37,14 +36,5 @@ public class Location {
 
 	@OneToOne(mappedBy = "companyLocation")
 	private Company company;
-	
-	
-	
-	
-	
-	 
-	
-	
-	
 
 }

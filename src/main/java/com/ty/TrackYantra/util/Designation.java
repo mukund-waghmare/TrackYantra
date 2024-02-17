@@ -1,4 +1,4 @@
-package com.ty.TrackYantra.dto;
+package com.ty.TrackYantra.util;
 
 import org.springframework.stereotype.Component;
 

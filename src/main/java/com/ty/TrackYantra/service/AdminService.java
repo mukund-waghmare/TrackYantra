@@ -4,12 +4,10 @@ import java.util.List;
 
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.ty.TrackYantra.dto.Admin;
-import com.ty.TrackYantra.dto.Designation;
+import com.ty.TrackYantra.util.Designation;
 import com.ty.TrackYantra.dto.Employee;
-import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ReportingManager;
 import com.ty.TrackYantra.dto.ResponseStructure;
 

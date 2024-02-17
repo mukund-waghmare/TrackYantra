@@ -2,18 +2,14 @@ package com.ty.TrackYantra.dto;
 
 import java.util.List;
 
-import org.hibernate.bytecode.internal.bytebuddy.PrivateAccessorException;
-import org.springframework.stereotype.Component;
+import com.ty.TrackYantra.util.Designation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
