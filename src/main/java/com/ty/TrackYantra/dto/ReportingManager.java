@@ -43,7 +43,8 @@ public class ReportingManager {
 	private byte [] image;
 
 	private Status status;
-	
+
+
 	@OneToMany(mappedBy ="reportingManager" )
 	@JsonIgnore
 	private List<Employee> employeeList;	
@@ -52,7 +53,6 @@ public class ReportingManager {
 	@ManyToOne
 	@JoinColumn(name = "reportingManagerList")
 	private Admin admin;
-	
 
 	@OneToMany(mappedBy = "reportingManager")
 	@JsonIgnore

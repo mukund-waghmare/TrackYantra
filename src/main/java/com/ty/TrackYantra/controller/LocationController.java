@@ -24,7 +24,7 @@ public class LocationController {
 	
 	@PostMapping("/saveLocation")
 	@Operation(description = "saving location",summary = "saving location")
-	@ApiResponses(value = {@ApiResponse(description = "location saved Successfully", responseCode = "201"),@ApiResponse(description = "Enable to save location", responseCode = "400")})
+	@ApiResponses(value = {@ApiResponse(description =  "location saved Successfully", responseCode = "201"),@ApiResponse(description = "Enable to save location", responseCode = "400")})
 	public ResponseEntity<ResponseStructure<Location>> saveLocation(@RequestBody Location location)
 	{
 		return locationServiceObject.saveLocation(location);
@@ -34,6 +34,7 @@ public class LocationController {
 	@ApiResponses(value= {@ApiResponse(description = " Employee found By Id",responseCode = "201"),@ApiResponse(description = "Employee Doesnot Exist For Specified Id",responseCode = "404")})
 	public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(@PathVariable int passedLocationId)
 	{
+		
 		return locationServiceObject.getLocationByLocationId(passedLocationId);
 	}
 
