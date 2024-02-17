@@ -23,13 +23,14 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int locationId;
+
+
 	private double longitude;
 	private double latitude;
 
 	private String organisationAddress;
 	
 	private String city;
-	
 	private String  country;
 	
 	

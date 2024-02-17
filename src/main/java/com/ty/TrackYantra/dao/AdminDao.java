@@ -96,9 +96,14 @@ public class  AdminDao {
 	public List<Employee> getEmployeeByReportingManagerID(int passedReportingManagerId)
 	{
 		Optional<ReportingManager> reportingManager=repotingManagerRepositoryObject.findById(passedReportingManagerId);
-		if(reportingManager!=null)
+		if(reportingManager.isPresent())
 		{
-			return reportingManager.get().getEmployeeList();
+			 List<Employee> employeeList=reportingManager.get().getEmployeeList();
+			 if(employeeList!=null)
+			 {
+				 return employeeList;
+			 }
+			 
 		}
 		return null;
 	}

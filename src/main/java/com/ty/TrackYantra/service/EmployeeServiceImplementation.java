@@ -1,5 +1,6 @@
 package com.ty.TrackYantra.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ty.TrackYantra.dao.AdminDao;
 import com.ty.TrackYantra.dao.EmployeeDao;
@@ -17,6 +19,7 @@ import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.exception.EmployeeNotFoundException;
 import com.ty.TrackYantra.exception.EmployeeNotSaved;
 import com.ty.TrackYantra.exception.IdNotFoundException;
+import com.ty.TrackYantra.exception.ImageSizeExceedException;
 import com.ty.TrackYantra.exception.InvalidAdminCredentials;
 import com.ty.TrackYantra.exception.InvalidEmployeeCredentialsException;
 import com.ty.TrackYantra.exception.NoEmployeesExistException;
@@ -205,6 +208,36 @@ public class EmployeeServiceImplementation implements EmployeeService{
 		}
 		
 		
+	}
+
+	@Override
+	public ResponseEntity<ResponseStructure<Employee>> saveProfilePhoto(int employeeId,MultipartFile multipart) {
+		
+		byte[] image=null;
+		
+		try {
+			image = multipart.getBytes();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new ImageSizeExceedException("Image Size Exceeded keep Image Size less 2mb");
+		}
+		
+		Optional<Employee> employeeOpt=employeeRepository.findById(employeeId);
+		
+		if(employeeOpt.isPresent())
+		{
+			Employee employee=employeeOpt.get();
+			employee.setEmployeeImage(image);
+			Employee emp=employeeDao.updateEmployeeById(employee);
+			ResponseStructure<Employee> resp= new ResponseStructure<Employee>();
+			resp.setData(emp);
+			resp.setStatusCode(HttpStatus.ACCEPTED.value());
+			resp.setMessage("Success");
+			
+			return new ResponseEntity<ResponseStructure<Employee>>(resp,HttpStatus.ACCEPTED);
+		}
+		
+		throw new EmployeeNotFoundException("Employee does not exist for the specified : "+employeeId);
 	}
 
 }
