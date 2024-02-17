@@ -83,4 +83,13 @@ public class LocationServiceImplimentation implements LocationService {
 		}else
 			throw new AdminNotFoundException("Admin Not Found");
     }
+
+	@Override
+	public ResponseEntity<ResponseStructure<Location>> validateLocation(int organisationId, double altitude,double lattitude) {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+
+	
 }
