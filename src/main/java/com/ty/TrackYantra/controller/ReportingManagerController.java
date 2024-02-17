@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,17 +58,23 @@ public class ReportingManagerController {
         return reportingManagerService.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword,adminEmail,adminPassword);
     }
 
+    @Operation(description = "Update Reporting Manager Location By Reporting Manager Id",summary = "update reporting manager location by reporting manager id")
+    @ApiResponses(value = {@ApiResponse(description = "update reporting manager location by his id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
     @PutMapping("updateReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/locationId/{locationId}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,@PathVariable int locationId,String adminEmail,String adminPassword){
        return reportingManagerService.updateReportingManagerLocationByReportingManagerId(reportingManagerId,locationId,adminPassword,adminEmail);
     }
 
 
+    @Operation(description = "Delete Reporting Manager Location By Reporting Manager Id",summary = "delete reporting manager location by reporting manager id")
+    @ApiResponses(value = {@ApiResponse(description = "delete reporting manager location by his id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
     @PutMapping("deletedReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
     public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,String adminEmail,String adminPassword){
         return reportingManagerService.deleteReportingManagerLocationByReportingManagerId(reportingManagerId,adminPassword,adminEmail);
     }
 
+    @Operation(description = "Upload Reporting Manager Image By Reporting Manager Id",summary = "upload reporting manager profile image by reporting manager id")
+    @ApiResponses(value = {@ApiResponse(description = "upload reporting manager profile image by id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
     @PostMapping("uploadProfileImage/reportingManagerId/{reportingManagerId}")
     public ResponseEntity<ResponseStructure<ReportingManager>> uploadProfileImage(@PathVariable int reportingManagerId,@RequestParam("image") MultipartFile file){
         return reportingManagerService.uploadProfileImage(reportingManagerId,file);

@@ -1,10 +1,11 @@
 package com.ty.TrackYantra.service;
 
 
+import com.ty.TrackYantra.dao.AdminDao;
 import com.ty.TrackYantra.dao.LocationDao;
-import com.ty.TrackYantra.dto.Location;
-import com.ty.TrackYantra.dto.ResponseStructure;
+import com.ty.TrackYantra.dto.*;
 
+import com.ty.TrackYantra.exception.AdminNotFoundException;
 import com.ty.TrackYantra.exception.LocationByAddressNotFound;
 import com.ty.TrackYantra.repository.LocationRepository;
 
@@ -25,54 +26,61 @@ public class LocationServiceImplimentation implements LocationService {
 	@Autowired
 	LocationDao locationDaoObject;
 
+	@Autowired
+	private AdminDao adminDao;
+
 	@Override
-	public ResponseEntity<ResponseStructure<Location>> saveLocation(Location passedLocation) {
-		
-		Location location=locationDaoObject.saveLocation(passedLocation);
-		System.out.println("=================service after saving======="+location);
-		ResponseStructure<Location> resp= new ResponseStructure<>();
-		resp.setMessage("Success");
-		resp.setStatusCode(HttpStatus.ACCEPTED.value());
-		resp.setData(location);		
-		return new ResponseEntity<ResponseStructure<Location>>(resp,HttpStatus.ACCEPTED);
+	public ResponseEntity<ResponseStructure<Location>> saveLocation(Location passedLocation,String adminEmail,String adminPassword) {
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if (admin!=null) {
+			Location location = locationDaoObject.saveLocation(passedLocation);
+			if (location!=null) {
+				ResponseStructure<Location> resp = new ResponseStructure<>();
+				resp.setMessage("Success");
+				resp.setStatusCode(HttpStatus.ACCEPTED.value());
+				resp.setData(location);
+				return new ResponseEntity<ResponseStructure<Location>>(resp, HttpStatus.ACCEPTED);
+			}else
+				throw new LocationIdNotFoundException("Location Id Not Found");
+		}else
+			throw new AdminNotFoundException("Admin Not Found");
 	
 	}
 
 	@Override
-	public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(int passedLocationId) {
-		// TODO Auto-generated method stub
-		Location location =locationDaoObject.getLocationByLocationId(passedLocationId);
-		
-		if(location!=null)
-		{
-			ResponseStructure<Location> resp = new ResponseStructure<>();
-			resp.setMessage("Success");
-			resp.setStatusCode(HttpStatus.ACCEPTED.value());
-			resp.setData(location);
-			
-			return new ResponseEntity<ResponseStructure<Location>>(resp,HttpStatus.ACCEPTED);
-		}
-		
-		throw new LocationIdNotFoundException("Location Doesnot Exist For Specified Id : "+passedLocationId);
+	public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(int passedLocationId,String adminEmail,String adminPassword) {
+		Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if (admin!=null) {
+			Location location = locationDaoObject.getLocationByLocationId(passedLocationId);
+			if (location != null) {
+				ResponseStructure<Location> resp = new ResponseStructure<>();
+				resp.setMessage("Success");
+				resp.setStatusCode(HttpStatus.ACCEPTED.value());
+				resp.setData(location);
+
+				return new ResponseEntity<ResponseStructure<Location>>(resp, HttpStatus.ACCEPTED);
+			}
+
+			throw new LocationIdNotFoundException("Location Doesnot Exist For Specified Id : " + passedLocationId);
+		}else
+			throw new AdminNotFoundException("Admin Not Found");
 	}
-	
-
-	
-
-    @Autowired
-    private LocationDao locationDao;
 
 
     @Override
-    public ResponseEntity<ResponseStructure<Location>> findLocationByLocationAddress(String address) {
-        Location location = locationDao.findLocationByLocationAddress(address);
-        if (location!=null){
-            ResponseStructure<Location> responseStructure = new ResponseStructure<>();
-            responseStructure.setStatusCode(HttpStatus.OK.value());
-            responseStructure.setMessage("Success");
-            responseStructure.setData(location);
-            return new ResponseEntity<ResponseStructure<Location>>(responseStructure,HttpStatus.OK);
-        }else
-            throw new LocationByAddressNotFound("Location Of Corresponding Address Not Found");
+    public ResponseEntity<ResponseStructure<Location>> findLocationByLocationAddress(String address,String adminEmail,String adminPassword) {
+        Admin admin = adminDao.getAdminByEmailAndPassword(adminEmail,adminPassword);
+		if (admin!=null) {
+			Location location = locationDaoObject.findLocationByLocationAddress(address);
+			if (location != null) {
+				ResponseStructure<Location> responseStructure = new ResponseStructure<>();
+				responseStructure.setStatusCode(HttpStatus.OK.value());
+				responseStructure.setMessage("Success");
+				responseStructure.setData(location);
+				return new ResponseEntity<ResponseStructure<Location>>(responseStructure, HttpStatus.OK);
+			} else
+				throw new LocationByAddressNotFound("Location Of Corresponding Address Not Found");
+		}else
+			throw new AdminNotFoundException("Admin Not Found");
     }
 }
