@@ -62,5 +62,8 @@ public class Employee {
 	@OneToMany(mappedBy = "employee")
 	@JsonIgnore
 	private List<Logout>  logouts;
+	
+	
+	private byte [] employeeImage;
 
 }

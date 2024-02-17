@@ -24,13 +24,7 @@ public class Location {
 	private int locationId;
 	private String longitude;
 	private String latitude;
-	
-	private String accurracy;
-	
-	private LocalDateTime timeStamp;
-	
 	private String city;
-	
 	private String  country;
 	
 	
