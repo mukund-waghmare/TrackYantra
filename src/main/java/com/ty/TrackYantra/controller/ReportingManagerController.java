@@ -39,8 +39,8 @@ public class ReportingManagerController {
 
     @Operation(description = "Save Reporting Manager",summary = "save reporting manager")
     @ApiResponses(value = {@ApiResponse(description = "Save Reporting Manager",responseCode = "200"),@ApiResponse(description = "Not Save",responseCode = "400")})
-    @PostMapping("/addReportingManager/adminEmail/{adminEmail}/adminPassword/{adminPassword}/locationId/{locationId}")
-    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(@PathVariable String adminEmail, @PathVariable String adminPassword, @RequestBody ReportingManager reportingManager,@PathVariable int locationId) {
+    @PostMapping("/addReportingManager/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
+    public ResponseEntity<ResponseStructure<ReportingManager>> saveReportingManager(@PathVariable String adminEmail, @PathVariable String adminPassword, @RequestBody ReportingManager reportingManager) {
         return reportingManagerService.saveReportingManager(adminEmail,adminPassword,reportingManager);
     }
 
@@ -54,22 +54,22 @@ public class ReportingManagerController {
     @Operation(description = "Get Reporting Manager by Email And Password",summary = "get reporting email manager by email and password")
     @ApiResponses(value = {@ApiResponse(description = "Get Reporting Manager By Email And Password",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
     @GetMapping("/getReportingManagerByEmailAndPassword/reportingManagerEmail/{reportingManagerEmail}/reportingManagerPassword/{reportingManagerPassword}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
-    public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(@PathVariable String reportingManagerEmail,@PathVariable String reportingManagerPassword,String adminEmail,String adminPassword){
+    public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(@PathVariable String reportingManagerEmail,@PathVariable String reportingManagerPassword,@PathVariable String adminEmail,@PathVariable String adminPassword){
         return reportingManagerService.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword,adminEmail,adminPassword);
     }
 
     @Operation(description = "Update Reporting Manager Location By Reporting Manager Id",summary = "update reporting manager location by reporting manager id")
     @ApiResponses(value = {@ApiResponse(description = "update reporting manager location by his id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
     @PutMapping("updateReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/locationId/{locationId}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
-    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,@PathVariable int locationId,String adminEmail,String adminPassword){
+    public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,@PathVariable int locationId,@PathVariable String adminEmail,@PathVariable String adminPassword){
        return reportingManagerService.updateReportingManagerLocationByReportingManagerId(reportingManagerId,locationId,adminPassword,adminEmail);
     }
 
 
     @Operation(description = "Delete Reporting Manager Location By Reporting Manager Id",summary = "delete reporting manager location by reporting manager id")
     @ApiResponses(value = {@ApiResponse(description = "delete reporting manager location by his id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
-    @PutMapping("deletedReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
-    public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,String adminEmail,String adminPassword){
+    @DeleteMapping("deletedReportingManagerLocationByReportingManagerId/reportingManagerId/{reportingManagerId}/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
+    public ResponseEntity<ResponseStructure<ReportingManager>> deleteReportingManagerLocationByReportingManagerId(@PathVariable int reportingManagerId,@PathVariable String adminEmail,@PathVariable String adminPassword){
         return reportingManagerService.deleteReportingManagerLocationByReportingManagerId(reportingManagerId,adminPassword,adminEmail);
     }
 
@@ -79,4 +79,5 @@ public class ReportingManagerController {
     public ResponseEntity<ResponseStructure<ReportingManager>> uploadProfileImage(@PathVariable int reportingManagerId,@RequestParam("image") MultipartFile file){
         return reportingManagerService.uploadProfileImage(reportingManagerId,file);
     }
+
 }
