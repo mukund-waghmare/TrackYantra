@@ -8,8 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +17,18 @@ import com.ty.TrackYantra.dto.Location;
 import com.ty.TrackYantra.dto.ResponseStructure;
 import com.ty.TrackYantra.service.LocationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 public class LocationController {
 	
 	
 	@Autowired
 	LocationService locationServiceObject;
+
 
 	@Operation(description = "Find Location By Location Address",summary = "find location by location address")
 	@ApiResponses(value = {@ApiResponse(description = "find location by location address",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
@@ -45,11 +50,9 @@ public class LocationController {
 	@Operation(description = "Get Location By Location Id",summary = "get location by location id")
 	@ApiResponses(value = {@ApiResponse(description = "get location by location id",responseCode = "200"),@ApiResponse(description = "Not Found",responseCode = "404")})
 	@GetMapping("getLocationByLocationId/adminEmail/{adminEmail}/adminPassword/{adminPassword}")
-	public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(@PathVariable int passedLocationId,String adminEmail,String adminPassword)
-	{
-		return locationServiceObject.getLocationByLocationId(passedLocationId,adminEmail,adminPassword);
+	public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(@PathVariable int passedLocationId,String adminEmail,String adminPassword) {
+		return locationServiceObject.getLocationByLocationId(passedLocationId, adminEmail, adminPassword);
 	}
-
 	
 
 }

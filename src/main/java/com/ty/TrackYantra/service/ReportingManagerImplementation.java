@@ -118,8 +118,6 @@ public class ReportingManagerImplementation implements ReportingManagerService {
             throw new IdNotFoundException("Admin with specified id");
     }
 
-
-
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> getReportingManagerByEmailAndPassword(String reportingManagerEmail, String reportingManagerPassword,String adminEmail,String adminPassword) {
          ReportingManager reportingManager = reportingManagerDao.getReportingManagerByEmailAndPassword(reportingManagerEmail,reportingManagerPassword);
@@ -136,7 +134,6 @@ public class ReportingManagerImplementation implements ReportingManagerService {
          }else
              throw new AdminNotFoundException("Admin Data Not Found");
     }
-
 
     @Override
     public ResponseEntity<ResponseStructure<ReportingManager>> updateReportingManagerLocationByReportingManagerId(int reportingManagerId, int locationId,String adminEmail,String adminPassword) {

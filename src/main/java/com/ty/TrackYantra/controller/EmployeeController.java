@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ty.TrackYantra.dto.Admin;
 import com.ty.TrackYantra.dto.Employee;
@@ -28,43 +29,50 @@ public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
-	
-	@Operation(description = "saving employee",summary = "saving employee")
-	@ApiResponses(value = {@ApiResponse(description = "employee saved successfully",responseCode = "201"),@ApiResponse(description = "unable to save employee",responseCode = "400")})
+
+	@Operation(description = "saving employee", summary = "saving employee")
+	@ApiResponses(value = {@ApiResponse(description = "employee saved successfully", responseCode = "201"), @ApiResponse(description = "unable to save employee", responseCode = "400")})
 	@PostMapping("/saveemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}")
-	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@RequestBody Employee employee) {
-		
+	public ResponseEntity<ResponseStructure<Employee>> saveEmployee(@PathVariable String adminEmail, @PathVariable String adminPassword, @RequestBody Employee employee) {
+
 		return employeeService.saveEmployee(adminEmail, adminPassword, employee);
 	}
-	
-	@Operation(description = "Update Employee details",summary = "Update Employee details")
-	@ApiResponses(value = {@ApiResponse(description = "Employee details updated",responseCode = "200"),@ApiResponse(description = "Employee details Not Updated",responseCode = "400")})
+
+	@Operation(description = "Update Employee details", summary = "Update Employee details")
+	@ApiResponses(value = {@ApiResponse(description = "Employee details updated", responseCode = "200"), @ApiResponse(description = "Employee details Not Updated", responseCode = "400")})
 	@PutMapping("/updateemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
-    public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
+	public ResponseEntity<ResponseStructure<Employee>> updateEmployee(@PathVariable String adminEmail, @PathVariable String adminPassword, @PathVariable int eid, @RequestBody Employee employee) {
 		return employeeService.updateEmployeeNameById(adminEmail, adminPassword, eid, employee);
 	}
-	
-	@Operation(description = "delete Employee",summary = "Delete Employee")
-	@ApiResponses(value = {@ApiResponse(description = "Employee deleted",responseCode = "200"),@ApiResponse(description = "Employee Not Deleted",responseCode = "400")})
+
+	@Operation(description = "delete Employee", summary = "Delete Employee")
+	@ApiResponses(value = {@ApiResponse(description = "Employee deleted", responseCode = "200"), @ApiResponse(description = "Employee Not Deleted", responseCode = "400")})
 	@DeleteMapping("/deleteemployee/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
-    public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid,@RequestBody Employee employee) {
-		
+	public ResponseEntity<ResponseStructure<Employee>> deleteEmployee(@PathVariable String adminEmail, @PathVariable String adminPassword, @PathVariable int eid, @RequestBody Employee employee) {
+
 		return employeeService.deleteEmployee(adminEmail, adminPassword, eid, employee);
 	}
-	
-	@Operation(description = "get Employee by id",summary = "get Employee by id")
-	@ApiResponses(value = {@ApiResponse(description = "Employee details fetched successfully",responseCode = "200"),@ApiResponse(description = "Employee not found with given id",responseCode = "400")})
+
+	@Operation(description = "get Employee by id", summary = "get Employee by id")
+	@ApiResponses(value = {@ApiResponse(description = "Employee details fetched successfully", responseCode = "200"), @ApiResponse(description = "Employee not found with given id", responseCode = "400")})
 	@GetMapping("/getemployeebyid/adminemail/{adminEmail}/adminpassword/{adminPassword}/employeeid/{eid}")
-    public ResponseEntity<ResponseStructure<Employee>> getEmployeeById(@PathVariable String adminEmail,@PathVariable String adminPassword,@PathVariable int eid) {
-		
+	public ResponseEntity<ResponseStructure<Employee>> getEmployeeById(@PathVariable String adminEmail, @PathVariable String adminPassword, @PathVariable int eid) {
+
 		return employeeService.getEmployeeById(adminEmail, adminPassword, eid);
 	}
-	
-	@Operation(description = "get All Employees",summary = "get All Employees")
-	@ApiResponses(value = {@ApiResponse(description = "Employees list fetched successfully",responseCode = "200"),@ApiResponse(description = "No Employees exist",responseCode = "400")})
+
+	@Operation(description = "get All Employees", summary = "get All Employees")
+	@ApiResponses(value = {@ApiResponse(description = "Employees list fetched successfully", responseCode = "200"), @ApiResponse(description = "No Employees exist", responseCode = "400")})
 	@GetMapping("/getallemployees/adminemail/{adminEmail}/adminpassword/{adminPassword}")
-    public ResponseEntity<ResponseStructure<List<Employee>>> getAllEmployees(@PathVariable String adminEmail,@PathVariable String adminPassword) {
+	public ResponseEntity<ResponseStructure<List<Employee>>> getAllEmployees(@PathVariable String adminEmail, @PathVariable String adminPassword) {
 		return employeeService.getAllEmployees(adminEmail, adminPassword);
+	}
+
+	@Operation(description = "save profile photo", summary = "save profile photo")
+	@ApiResponses(value = {@ApiResponse(description = " profile photo saved successfully", responseCode = "200"), @ApiResponse(description = "failed to save profile photo", responseCode = "400")})
+	@GetMapping("/saveImageToEmployee/employeeId/{employeeId}")
+	public ResponseEntity<ResponseStructure<Employee>> getAllEmployees(@PathVariable int employeeId, MultipartFile multipart) {
+		return employeeService.saveProfilePhoto(employeeId, multipart);
 	}
 
 }
