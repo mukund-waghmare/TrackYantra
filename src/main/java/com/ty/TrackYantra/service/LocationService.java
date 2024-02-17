@@ -13,11 +13,11 @@ public interface LocationService {
 	
 	
 	
-	     ResponseEntity<ResponseStructure<Location>> saveLocation(Location location);
+	     public ResponseEntity<ResponseStructure<Location>> saveLocation(Location location);
 
 	     public ResponseEntity<ResponseStructure<Location>> getLocationByLocationId(int passedLocationId);
 	 	
-	      
-
-    ResponseEntity<ResponseStructure<Location>> findLocationByLocationAddress(String address);
+	     public ResponseEntity<ResponseStructure<Location>> findLocationByLocationAddress(String address);
+	     
+	     public ResponseEntity<ResponseStructure<Location>> validateLocation(int organisationId,double altitude,double lattitude);
 }

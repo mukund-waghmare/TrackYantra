@@ -1,8 +1,5 @@
 package com.ty.TrackYantra.dto;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,36 +10,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location {
-
+@Entity
+public class Company {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int locationId;
-
-
-	private double longitude;
-	private double latitude;
-
-	private String organisationAddress;
-
-	private String city;
-	private String  country;
+	private int companyId;
 	
-
-	@OneToOne(mappedBy = "companyLocation")
-	private Company company;
+	private String companyName;
 	
+	@OneToOne
+	private Location companyLocation;
 	
-	
-	
-	
-	 
 	
 	
 	
